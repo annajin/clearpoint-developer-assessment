@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
+using TodoList.Api.Interfaces;
 
 namespace TodoList.Api.Controllers
 {
@@ -13,18 +13,22 @@ namespace TodoList.Api.Controllers
     {
         private readonly TodoContext _context;
         private readonly ILogger<TodoItemsController> _logger;
+        private readonly ITodoItemsService _todoItemsService;
+        private readonly ITodoItemsHelper _helper;
 
-        public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger)
+        public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger, ITodoItemsService todoItemsService, ITodoItemsHelper helper)
         {
             _context = context;
             _logger = logger;
+            _todoItemsService = todoItemsService;
+            _helper = helper;
         }
 
         // GET: api/TodoItems
         [HttpGet]
         public async Task<IActionResult> GetTodoItems()
         {
-            var results = await _context.TodoItems.Where(x => !x.IsCompleted).ToListAsync();
+            var results = await _todoItemsService.GetAllIncompleteTodoItems();
             return Ok(results);
         }
 
@@ -32,7 +36,7 @@ namespace TodoList.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTodoItem(Guid id)
         {
-            var result = await _context.TodoItems.FindAsync(id);
+            var result = await _todoItemsService.GetTodoItemWithId(id);
 
             if (result == null)
             {
@@ -51,15 +55,13 @@ namespace TodoList.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(todoItem).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _todoItemsService.UpdateTodoItem(todoItem);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TodoItemIdExists(id))
+                if (!_helper.TodoItemIdExists(id))
                 {
                     return NotFound();
                 }
@@ -80,26 +82,14 @@ namespace TodoList.Api.Controllers
             {
                 return BadRequest("Description is required");
             }
-            else if (TodoItemDescriptionExists(todoItem.Description))
+            else if (_helper.TodoItemDescriptionExists(todoItem.Description))
             {
                 return BadRequest("Description already exists");
             } 
 
-            _context.TodoItems.Add(todoItem);
-            await _context.SaveChangesAsync();
+            await _todoItemsService.AddTodoItem(todoItem);
              
             return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         } 
-
-        private bool TodoItemIdExists(Guid id)
-        {
-            return _context.TodoItems.Any(x => x.Id == id);
-        }
-
-        private bool TodoItemDescriptionExists(string description)
-        {
-            return _context.TodoItems
-                   .Any(x => x.Description.ToLowerInvariant() == description.ToLowerInvariant() && !x.IsCompleted);
-        }
     }
 }
