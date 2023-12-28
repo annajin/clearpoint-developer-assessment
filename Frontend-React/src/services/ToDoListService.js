@@ -5,8 +5,7 @@ export default class ToDoListService {
   async getAllToDoItems() {
     try {
       const response = await axios.get(baseUrl);
-      // sort by iscompleted then by description?
-      return response.data.sort((a,b) => (a.isCompleted - b.isCompleted || a.description.toLowerCase() < b.description.toLowerCase() ? -1 : 1));
+      return response.data.sort((a,b) => (a.description.toLowerCase() < b.description.toLowerCase() ? -1 : 1));
     } catch (error) {
       throw error;
     }
@@ -17,6 +16,14 @@ export default class ToDoListService {
       const response = await axios.post(baseUrl, item);
       console.log(response);
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async markToDoItemCompleted(item) {
+    try {
+      await axios.put(baseUrl + "/" + item.id, item);
     } catch (error) {
       throw error;
     }

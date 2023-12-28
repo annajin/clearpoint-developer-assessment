@@ -34,7 +34,7 @@ const App = () => {
         </Form.Group>
         <Form.Group as={Row} className="mb-3 offset-md-2" controlId="formAddTodoItem">
           <Stack direction="horizontal" gap={2}>
-            <Button variant="primary" onClick={() => handleAdd()}>
+            <Button variant="primary" disabled={description === ''} onClick={() => handleAdd()}>
               Add Item
             </Button>
             <Button variant="secondary" onClick={() => handleClear()}>
@@ -88,7 +88,8 @@ const App = () => {
 
   async function getItems() {
     try {
-      alert('todo')
+      const todoItems = await toDoService.getAllToDoItems();
+      setItems(todoItems);
     } catch (error) {
       console.error(error)
     }
@@ -97,8 +98,6 @@ const App = () => {
   async function handleAdd() {
     try {
       const res = await toDoService.postToDoItem({ id: uuidv4(), description: description })
-      console.log(res)
-
       // add the new item into the list
       setItems([...items, res])
     } catch (error) {
@@ -113,7 +112,9 @@ const App = () => {
 
   async function handleMarkAsComplete(item) {
     try {
-      alert('todo')
+      item.isCompleted = true
+      await toDoService.markToDoItemCompleted(item)
+      setItems(items.filter(i => i.id !== item.id))
     } catch (error) {
       console.error(error)
     }
