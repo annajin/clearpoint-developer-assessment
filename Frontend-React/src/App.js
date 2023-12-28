@@ -1,15 +1,18 @@
 import './App.css'
 import { Image, Alert, Button, Container, Row, Col, Form, Table, Stack } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
-const axios = require('axios')
+import ToDoListService from './services/ToDoListService'
 
 const App = () => {
   const [description, setDescription] = useState('')
   const [items, setItems] = useState([])
+  const toDoService = new ToDoListService()
 
   useEffect(() => {
-    // todo
+    // initial loading
+    toDoService.getAllToDoItems().then((todo) => setItems(todo))
   }, [])
 
   const renderAddTodoItemContent = () => {
@@ -80,7 +83,7 @@ const App = () => {
   }
 
   const handleDescriptionChange = (event) => {
-    // todo
+    setDescription(event.target.value)
   }
 
   async function getItems() {
@@ -93,9 +96,14 @@ const App = () => {
 
   async function handleAdd() {
     try {
-      alert('todo')
+      const res = await toDoService.postToDoItem({ id: uuidv4(), description: description })
+      console.log(res)
+
+      // add the new item into the list
+      setItems([...items, res])
     } catch (error) {
       console.error(error)
+      alert('todo')
     }
   }
 

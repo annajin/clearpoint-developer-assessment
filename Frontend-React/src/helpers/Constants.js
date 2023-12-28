@@ -1,0 +1,1 @@
+export const baseUrl = "https://localhost:32792/api/todoitems";
