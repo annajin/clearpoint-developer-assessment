@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App tests should match snapshot 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <img
+          className="img-fluid rounded"
+          src="clearPointLogo.png"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <div
+          className="fade alert alert-success show"
+          role="alert"
+        >
+          <div
+            className="alert-heading h4"
+          >
+            Todo List App
+          </div>
+          Welcome to the ClearPoint frontend technical test. We like to keep things simple, yet clean so your task(s) are as follows:
+          <br />
+          <br />
+          <ol
+            className="list-left"
+          >
+            <li>
+              Add the ability to add (POST) a Todo Item by calling the backend API
+            </li>
+            <li>
+              Display (GET) all the current Todo Items in the below grid and display them in any order you wish
+            </li>
+            <li>
+              Bonus points for completing the 'Mark as completed' button code for allowing users to update and mark a specific Todo Item as completed and for displaying any relevant validation errors/ messages from the API in the UI
+            </li>
+            <li>
+              Feel free to add unit tests and refactor the component(s) as best you see fit
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <div
+          className="container"
+        >
+          <h1>
+            Add Item
+          </h1>
+          <div
+            className="mb-3 row"
+          >
+            <label
+              className="form-label col-form-label col-sm-2"
+              htmlFor="formAddTodoItem"
+            >
+              Description
+            </label>
+            <div
+              className="col-md-6"
+            >
+              <input
+                className="form-control"
+                data-testid="text-input"
+                id="formAddTodoItem"
+                onChange={[Function]}
+                placeholder="Enter description..."
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="mb-3 offset-md-2 row"
+          >
+            <div
+              className="hstack gap-2 minBreakpoint-xs"
+            >
+              <button
+                className="btn btn-primary"
+                data-testid="add-button"
+                disabled={true}
+                onClick={[Function]}
+                type="button"
+              >
+                Add Item
+              </button>
+              <button
+                className="btn btn-secondary"
+                data-testid="clear-button"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <h1>
+          Showing 
+          0
+           Item(s)
+           
+          <button
+            className="pull-right btn btn-primary"
+            data-testid="refresh-button"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            Refresh
+          </button>
+        </h1>
+        <table
+          className="table table-striped table-bordered table-hover"
+        >
+          <thead>
+            <tr>
+              <th>
+                Id
+              </th>
+              <th>
+                Description
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="page-footer font-small teal pt-4"
+  >
+    <div
+      className="footer-copyright text-center py-3"
+    >
+      © 2021 Copyright:
+      <a
+        href="https://clearpoint.digital"
+        rel="noreferrer"
+        target="_blank"
+      >
+        clearpoint.digital
+      </a>
+    </div>
+  </footer>
+</div>
+`;

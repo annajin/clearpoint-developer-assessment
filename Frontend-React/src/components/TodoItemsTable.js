@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Table } from 'react-bootstrap'
 
 import ErrorHelper from '../helpers/ErrorHelper'
@@ -28,7 +29,7 @@ export default function TodoItemsTable({ items, setItems }) {
     <>
       <h1>
         Showing {items.length} Item(s){' '}
-        <Button variant="primary" className="pull-right" onClick={() => getItems()}>
+        <Button variant="primary" className="pull-right" onClick={() => getItems()} data-testid="refresh-button">
           Refresh
         </Button>
       </h1>
@@ -42,12 +43,12 @@ export default function TodoItemsTable({ items, setItems }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {items.map((item, index) => (
             <tr key={item.id}>
               <td>{item.id}</td>
               <td>{item.description}</td>
               <td>
-                <Button variant="warning" size="sm" onClick={() => handleMarkAsComplete(item)}>
+                <Button variant="warning" size="sm" onClick={() => handleMarkAsComplete(item)} data-testid={"complete-button-" + index}>
                   Mark as completed
                 </Button>
               </td>
