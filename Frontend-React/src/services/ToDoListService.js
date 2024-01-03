@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { baseUrl } from '../helpers/Constants';
 
-export default class ToDoListService {
-  async getAllToDoItems() {
+export default class TodoListService {
+  async getAllTodoItems() {
     try {
       const response = await axios.get(baseUrl);
       return response.data.sort((a,b) => (a.description.toLowerCase() < b.description.toLowerCase() ? -1 : 1));
@@ -11,17 +11,16 @@ export default class ToDoListService {
     }
   }
 
-  async postToDoItem(item) {
+  async postTodoItem(item) {
     try {
       const response = await axios.post(baseUrl, item);
-      console.log(response);
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async markToDoItemCompleted(item) {
+  async markTodoItemCompleted(item) {
     try {
       await axios.put(baseUrl + "/" + item.id, item);
     } catch (error) {
