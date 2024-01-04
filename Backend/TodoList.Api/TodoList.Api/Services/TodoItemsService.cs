@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoList.Api.Classes;
 using TodoList.Api.Interfaces;
 
 namespace TodoList.Api.Services
 {
     public class TodoItemsService : ITodoItemsService
     {
-        private readonly TodoContext _context;
+        private readonly ITodoContext _context;
 
-        public TodoItemsService(TodoContext context)
+        public TodoItemsService(ITodoContext context)
         {
             _context = context;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoList.Api.Classes;
 
 namespace TodoList.Api.Interfaces
 {

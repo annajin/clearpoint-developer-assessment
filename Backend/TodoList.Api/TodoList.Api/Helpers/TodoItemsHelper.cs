@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
+using TodoList.Api.Classes;
 using TodoList.Api.Interfaces;
 
 namespace TodoList.Api.Helpers
 {
     public class TodoItemsHelper : ITodoItemsHelper
     {
-        private readonly TodoContext _context;
+        private readonly ITodoContext _context;
 
-        public TodoItemsHelper(TodoContext context)
+        public TodoItemsHelper(ITodoContext context)
         {
             _context = context;
         }

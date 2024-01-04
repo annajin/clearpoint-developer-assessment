@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TodoList.Api.Classes;
 using TodoList.Api.Helpers;
 using TodoList.Api.Interfaces;
 using TodoList.Api.Services;
@@ -45,6 +46,7 @@ namespace TodoList.Api
             // Dependency Injection
             services.AddScoped<ITodoItemsService, TodoItemsService>();
             services.AddScoped<ITodoItemsHelper, TodoItemsHelper>();
+            services.AddScoped<ITodoContext, TodoContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

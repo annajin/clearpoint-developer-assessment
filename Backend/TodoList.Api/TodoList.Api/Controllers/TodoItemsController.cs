@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using TodoList.Api.Classes;
 using TodoList.Api.Interfaces;
 
 namespace TodoList.Api.Controllers
@@ -11,12 +12,12 @@ namespace TodoList.Api.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly ITodoContext _context;
         private readonly ILogger<TodoItemsController> _logger;
         private readonly ITodoItemsService _todoItemsService;
         private readonly ITodoItemsHelper _helper;
 
-        public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger, ITodoItemsService todoItemsService, ITodoItemsHelper helper)
+        public TodoItemsController(ITodoContext context, ILogger<TodoItemsController> logger, ITodoItemsService todoItemsService, ITodoItemsHelper helper)
         {
             _context = context;
             _logger = logger;
