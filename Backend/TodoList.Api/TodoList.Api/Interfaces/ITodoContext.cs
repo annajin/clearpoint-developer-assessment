@@ -13,6 +13,5 @@ namespace TodoList.Api.Interfaces
 
         // reference https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbcontext.entry?view=entity-framework-6.2.0
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
-
     }
 }
